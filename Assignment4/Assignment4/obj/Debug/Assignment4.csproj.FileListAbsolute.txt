@@ -1,0 +1,46 @@
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\obj\Debug\Assignment4.csprojResolveAssemblyReference.cache
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\App_Data\Chinook.mdf
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\App_Data\Chinook_log.ldf
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Web app project template v1.dll.config
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Web app project template v1.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Web app project template v1.pdb
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Antlr3.Runtime.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\AutoMapper.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\EntityFramework.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\EntityFramework.SqlServer.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.Web.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Newtonsoft.Json.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Helpers.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Mvc.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Optimization.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Razor.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.Razor.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\WebGrease.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Antlr3.Runtime.pdb
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\AutoMapper.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\EntityFramework.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\EntityFramework.SqlServer.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.Web.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\Newtonsoft.Json.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Helpers.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Mvc.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Optimization.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.Razor.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\bin\System.Web.WebPages.Razor.xml
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\obj\Debug\Web app project template v1.dll
+C:\Users\Phil\Documents\Visual Studio 2015\Projects\Assignment4\Assignment4\obj\Debug\Web app project template v1.pdb

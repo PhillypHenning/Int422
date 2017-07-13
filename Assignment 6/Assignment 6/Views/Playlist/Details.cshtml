@@ -1,0 +1,44 @@
+﻿@model Assignment6.Controllers.PlaylistWithDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Playlist Details <mark>@Html.DisplayFor(model => model.Name)</mark></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt></dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tracks)
+            <span class="badge">@Model.TracksCount</span>
+        </dt>
+        <dd>
+            @if (Model.TracksCount > 0)
+            {
+                foreach (var track in Model.Tracks)
+                {
+                    <span>@track.Name</span>
+                    <br />
+                }
+            }
+            else {
+                    <span>(None)</span>
+                 }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlaylistId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
