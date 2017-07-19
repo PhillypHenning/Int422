@@ -279,13 +279,22 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Errors\ServerError.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Upload.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Artist\Index.cshtml" />
+    <Content Include="Views\Artist\Details.cshtml" />
+    <Content Include="Views\Genre\Index.cshtml" />
+    <Content Include="Views\Track\Index.cshtml" />
+    <Content Include="Views\Track\Details.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Artist\Create.cshtml" />
+    <Content Include="Views\Artist\AddAlbum.cshtml" />
+    <Content Include="Views\Album\AddTrack.cshtml" />
+    <Content Include="Views\Track\Edit.cshtml" />
+    <Content Include="Views\Track\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Album\" />
-    <Folder Include="Views\Artist\" />
-    <Folder Include="Views\Genre\" />
-    <Folder Include="Views\Track\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

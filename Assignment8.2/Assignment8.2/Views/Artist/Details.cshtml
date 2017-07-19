@@ -1,0 +1,63 @@
+﻿@model Assignment8._2.Controllers.ArtistWithDetail
+
+@{
+    ViewBag.Title = @Html.DisplayFor(model => model.Name) + "Detail";
+}
+
+<h2>Artist : @Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <p>Artist Name or Stage Name</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            <p>Artist Photo</p>
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.UrlArtist)" height="400" width="400" />
+        </dd>
+
+        <dt>
+            <p>Birth or Start date</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthOrStartDate)
+        </dd>
+
+        <dt>
+            <p>Artist Birth Name (If Applicable)</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthName)
+        </dd>
+        <dt>
+            <p>Number of Albums</p>
+        </dt>
+
+        <dd>
+             @Model.Albums.Count()
+        </dd>
+
+        <dt>
+            <p>Who looks after this Artist</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executive)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index") | 
+    @Html.ActionLink("Add Album", "AddAlbum", new { id = Model.Id}) 
+</p>

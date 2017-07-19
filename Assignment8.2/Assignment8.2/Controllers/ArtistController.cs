@@ -13,13 +13,13 @@ namespace Assignment8._2.Controllers
         // GET: Artist
         public ActionResult Index()
         {
-            return View(m.ArtistGetAll());
+            return View(m.ArtistGetAllWithDetail());
         }
 
         // GET: Artist/Details/5
         public ActionResult Details(int? id)
         {
-            var o = m.ArtistGetById(id.GetValueOrDefault());
+            var o = m.ArtistWithDetailGetById(id.GetValueOrDefault());
 
             if (o == null) {
                 return HttpNotFound();
@@ -31,7 +31,7 @@ namespace Assignment8._2.Controllers
         {
             var form = new ArtistAddForm();
 
-            form.GenreList = new SelectList(m.GenreGetAll());
+            form.GenreList = new SelectList(m.GenreGetAll(), "Name", "Name");
             
             return View(form);
         }
@@ -63,48 +63,58 @@ namespace Assignment8._2.Controllers
                 return View();
             }
         }
-
-        // GET: Artist/Edit/5
-        public ActionResult Edit(int id)
+        // Get: Add album
+        [Route("Artist/{id}/addartist")]
+        public ActionResult AddAlbum(int? id)
         {
-            return View();
+            var a = m.ArtistWithDetailGetById(id.GetValueOrDefault());
+
+            if (a == null)
+            {
+                return HttpNotFound();
+            }else
+            {
+                var o = new AlbumAddForm();
+                o.ArtistId = a.Id;
+                o.ArtistName = a.Name;
+                o.GenreList = new SelectList(m.GenreGetAll(), "Name", "Name");
+
+                o.ArtistList = new MultiSelectList
+                    (items: m.ArtistGetAll(),
+                     dataValueField: "Id",
+                     dataTextField: "Name",
+                     selectedValues: new List<int>() { id.GetValueOrDefault() }
+                     );
+                o.TrackList = new MultiSelectList
+                    (items: m.TrackGetAll(),
+                    dataValueField: "Id",
+                    dataTextField: "Name",
+                    selectedValues: null);
+
+                return View(o);
+            }
         }
 
-        // POST: Artist/Edit/5
+        // POST: Add album
+        [Route("Artist/{id}/addartist")]
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult AddAlbum(AlbumAdd newItem)
         {
-            try
+            //Validate
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return View(newItem);
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Artist/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            // Process
+            var addedItem = m.AlbumAdd(newItem);
 
-        // POST: Artist/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            if(addedItem == null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+                return View(newItem);
+            }else
             {
-                return View();
+                return RedirectToAction("details", "album", new { id = addedItem.Id });
             }
         }
     }

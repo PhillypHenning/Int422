@@ -7,11 +7,16 @@ using System.Web.Mvc;
 
 namespace Assignment8._2.Controllers
 {
-    public class AlbumAddForm
+    public class AlbumAddForm : AlbumAdd
     {
         [StringLength(200)]
         public SelectList GenreList { get; set; }
         public string GenreName { get; set; }
+
+        public MultiSelectList ArtistList { get; set; }
+        public string ArtistName { get; set; }
+
+        public MultiSelectList TrackList { get; set; }
     }
 
     public class AlbumAdd
@@ -19,6 +24,8 @@ namespace Assignment8._2.Controllers
         public AlbumAdd()
         {
             ReleaseDate = DateTime.Now;
+            TrackIds = new List<int>();
+            UrlAlbum = "https://p6.zdassets.com/hc/theme_assets/808026/200152607/icon.reddit.gray.svg";
         }
 
         [Required, StringLength(200)]
@@ -31,15 +38,22 @@ namespace Assignment8._2.Controllers
         public string UrlAlbum { get; set; }
 
         public DateTime ReleaseDate { get; set; }
-
         public int ArtistId { get; set; }
-        public int TrackId { get; set; }
+        public IEnumerable<int> TrackIds { get; set; }
+        public string primaryGenre { get; set; }
     }
 
     public class AlbumBase : AlbumAdd
     {
+        public AlbumBase()
+        {
+            ArtistIds = new List<int>();
+        }
+
         [Key]
         public int Id { get; set; }
+
+        public IEnumerable<int> ArtistIds { get; set; }
     }
 
     public class AlbumWithDetail : AlbumBase
@@ -49,6 +63,7 @@ namespace Assignment8._2.Controllers
             Artists = new List<ArtistBase>();
             Tracks = new List<TrackBase>();
         }
+        public int TrackCount { get; set; }
 
         public IEnumerable<TrackBase> Tracks { get; set; }
         public IEnumerable<ArtistBase> Artists { get; set; }

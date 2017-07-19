@@ -14,13 +14,13 @@ namespace Assignment8._2.Controllers
         // GET: Track
         public ActionResult Index()
         {
-            return View(m.TrackGetAll());
+            return View(m.TrackGetAllWithDetail());
         }
 
         // GET: Track/Details/5
         public ActionResult Details(int? id)
         {
-            return View(m.TrackGetById(id.GetValueOrDefault()));
+            return View(m.TrackWithDetailGetById(id.GetValueOrDefault()));
         }
 
         // GET: Track/Create
@@ -62,41 +62,66 @@ namespace Assignment8._2.Controllers
         }
 
         // GET: Track/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            var o = m.TrackGetById(id.GetValueOrDefault());
+            if (o == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var editForm = m.mapper.Map<TrackBase, TrackEditInfoForm>(o);
+                return View(editForm);
+            }
         }
 
         // POST: Track/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, TrackEditInfo editItem)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = editItem.Id });
             }
-            catch
+
+            if(id.GetValueOrDefault() != editItem.Id)
             {
-                return View();
+                RedirectToAction("Index");
+            }
+
+            var editedItem = m.TrackEditInfo(editItem);
+            if (editedItem == null)
+            {
+                return RedirectToAction("Edit", new { id = editItem.Id });
+            }
+            else{
+                return RedirectToAction("Details", new { id = editItem.Id });
             }
         }
 
         // GET: Track/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            var itemToDel = m.TrackGetById(id.GetValueOrDefault());
+
+            if(itemToDel == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(itemToDel);
+            }
         }
 
         // POST: Track/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                var result = m.TrackDelete(id.GetValueOrDefault());               
                 return RedirectToAction("Index");
             }
             catch

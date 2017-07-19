@@ -66,6 +66,7 @@ namespace Assignment8._2.Controllers
                 cfg.CreateMap<Models.Track, Controllers.TrackBase>();
                 cfg.CreateMap<Models.Track, Controllers.TrackWithDetail>();
                 cfg.CreateMap<Controllers.TrackAdd, Models.Track>();
+                cfg.CreateMap<Controllers.TrackBase, Controllers.TrackEditInfoForm>();
 
                 // Genre Use Cases
                 cfg.CreateMap<Models.Genre, Controllers.GenreBase>();              
@@ -89,6 +90,7 @@ namespace Assignment8._2.Controllers
         {
             return ds.RoleClaims.OrderBy(r => r.Name).Select(r => r.Name).ToList();
         }
+        
         // ########### Album ###########################
         public IEnumerable<AlbumBase> AlbumGetAll()
         {
@@ -97,7 +99,7 @@ namespace Assignment8._2.Controllers
 
         public IEnumerable<AlbumWithDetail> AlbumGetAllWithDetail()
         {
-            var c = ds.Albums.Include("Artist").Include("Track");
+            var c = ds.Albums.Include("Artists").Include("Tracks");
             return mapper.Map<IEnumerable<Album>, IEnumerable<AlbumWithDetail>>(c);
         }
 
@@ -109,23 +111,27 @@ namespace Assignment8._2.Controllers
 
         public AlbumWithDetail AlbumWithDetailGetById(int? id)
         {
-            var o = ds.Albums.Include("Artist").Include("Track").SingleOrDefault(m => m.Id == id);
+            var o = ds.Albums.Include("Artists").Include("Tracks").SingleOrDefault(m => m.Id == id);
             return mapper.Map<Album, AlbumWithDetail>(o);
         }
 
         public AlbumWithDetail AlbumAdd(AlbumAdd newItem)
         {
-            var a = ds.Artists.Find(newItem.ArtistId);
-            var b = ds.Tracks.Find(newItem.TrackId);
-
-            if(a ==null || b == null)
+            var a = ds.Artists.Include("Albums").FirstOrDefault(ar => ar.Id == newItem.ArtistId);
+            if (a ==null)
             {
                 return null;
             }else
             {
+                foreach (var item in newItem.TrackIds)
+                {
+                    var b = ds.Tracks.Find(item);
+                    ds.Tracks.Add(b);
+                }
+
                 var addedItem = ds.Albums.Add(mapper.Map<AlbumAdd, Album>(newItem));
                 addedItem.Artists.Add(a);
-                addedItem.Tracks.Add(b);
+                //addedItem.Tracks.Add(b);
                 ds.SaveChanges();
 
                 return (addedItem == null) ? null : mapper.Map<Album, AlbumWithDetail>(addedItem);
@@ -142,7 +148,7 @@ namespace Assignment8._2.Controllers
 
         public IEnumerable<ArtistWithDetail> ArtistGetAllWithDetail()
         {
-            var c = ds.Artists.Include("Album");
+            var c = ds.Artists.Include("Albums");
             return mapper.Map<IEnumerable<Artist>, IEnumerable<ArtistWithDetail>>(c);
         }
 
@@ -154,13 +160,13 @@ namespace Assignment8._2.Controllers
 
         public ArtistWithDetail ArtistWithDetailGetById(int? id)
         {
-            var o = ds.Artists.Include("Album").SingleOrDefault(m => m.Id == id);
+            var o = ds.Artists.Include("Albums").SingleOrDefault(m => m.Id == id);
             return mapper.Map<Artist, ArtistWithDetail>(o);
         }
 
         public ArtistWithDetail ArtistAdd(ArtistAdd newItem)
         {
-            var a = ds.Albums.Find(newItem.AlbumId);
+            var a = ds.Albums.Find(newItem.AlbumIds);
 
             var addedItem = ds.Artists.Add(mapper.Map<ArtistAdd, Artist>(newItem));
 
@@ -182,7 +188,7 @@ namespace Assignment8._2.Controllers
 
         public IEnumerable<TrackWithDetail> TrackGetAllWithDetail()
         {
-            var c = ds.Tracks.Include("Album");
+            var c = ds.Tracks.Include("Albums");
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetail>>(c);
         }
 
@@ -194,13 +200,26 @@ namespace Assignment8._2.Controllers
 
         public TrackWithDetail TrackWithDetailGetById(int? id)
         {
-            var o = ds.Tracks.Include("Album").SingleOrDefault(m => m.Id == id);
-            return mapper.Map<Track, TrackWithDetail>(o);
+            var o = ds.Tracks.Include("Albums.Artists").SingleOrDefault(m => m.Id == id);
+
+            if (o == null)
+            {
+                return null;
+            }
+            else
+            {
+                // Create the result collection
+                var result = mapper.Map<Track, TrackWithDetail>(o);
+                // Fill in the album names
+                result.AlbumNames = o.Albums.Select(a => a.Name);
+
+                return result;
+            }
         }
 
         public TrackWithDetail TrackAdd(TrackAdd newItem)
         {
-            var a = ds.Albums.Find(newItem.AlbumId);
+            var a = ds.Albums.Find(newItem.AlbumIds);
 
             if (a == null)
             {
@@ -215,10 +234,43 @@ namespace Assignment8._2.Controllers
                 return (addedItem == null) ? null : mapper.Map<Track, TrackWithDetail>(addedItem);
             }
         }
+
+        public TrackBase TrackEditInfo(TrackEditInfo editItem)
+        {
+            var o = ds.Tracks.FirstOrDefault(t => t.Id == editItem.Id);
+
+            if(o == null)
+            {
+                return null;
+            }else
+            {
+                ds.Entry(o).CurrentValues.SetValues(editItem);
+                ds.SaveChanges();
+            }
+            return mapper.Map<Track, TrackBase>(o);
+        }
+
+        public bool TrackDelete(int? id)
+        {
+            var itemToDel = ds.Tracks.Find(id.GetValueOrDefault());
+
+            if (itemToDel == null)
+            {
+                return false;
+            }
+            else
+            {
+                ds.Tracks.Remove(itemToDel);
+                ds.SaveChanges();
+                return true;
+            }
+        }
+
+
         // ########### Genre ###########################
         public IEnumerable<GenreBase> GenreGetAll()
         {
-            return mapper.Map<IEnumerable<Genre>, IEnumerable<GenreBase>>(ds.Genres);
+            return mapper.Map<IEnumerable<Genre>, IEnumerable<GenreBase>>(ds.Genres.OrderBy(m=> m.Name));
         }
 
 
@@ -277,6 +329,9 @@ namespace Assignment8._2.Controllers
                 ds.Genres.Add(new Genre { Name = "Rock" });
                 ds.Genres.Add(new Genre { Name = "Chill" });
                 ds.Genres.Add(new Genre { Name = "Pop" });
+                ds.Genres.Add(new Genre { Name = "Hip Hop" });
+                ds.Genres.Add(new Genre { Name = "RnB" });
+                ds.Genres.Add(new Genre { Name = "Country" });    
             }
             if (ds.Artists.Count() == 0)
             {
@@ -287,7 +342,7 @@ namespace Assignment8._2.Controllers
                     Executive = exec,
                     Genre = "Rock",
                     Name = "I set the sea on fire",
-                    UrlArtist = "https://en.wikipedia.org/wiki/I_Set_The_Sea_On_Fire#/media/File:ISTSOF_Sheffield_O2.jpg"
+                    UrlArtist = "http://f4.bcbits.com/img/0005375454_100.png"
                 });
                 ds.Artists.Add(new Artist()
                 {
@@ -316,6 +371,8 @@ namespace Assignment8._2.Controllers
                     Name = "Beirut",
                     UrlArtist = "http://beirutband.com/wp-content/uploads/2015/09/video-elephantgun.jpg"
                 });
+
+                ds.SaveChanges();
             }
             if (ds.Albums.Count() == 0)
             {
@@ -369,6 +426,8 @@ namespace Assignment8._2.Controllers
                     ReleaseDate = new DateTime(2011, 12, 23),
                     UrlAlbum = "http://glasswerk.co.uk/img/news/tastes%20like%20funk%20packshot_1450190139.jpg"
                 });
+
+                ds.SaveChanges();
             }
 
             var TLF = ds.Albums.SingleOrDefault(a => a.Name == "Tastes like funk");

@@ -1,0 +1,3 @@
+﻿1>------ Build started: Project: Assignment8.2, Configuration: Debug Any CPU ------
+1>  Assignment8.2 -> D:\Semester 4\INT422\Assignment8.2\Assignment8.2\bin\Web app project template v2.dll
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
