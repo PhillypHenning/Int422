@@ -188,7 +188,7 @@ namespace Assignment8._2.Controllers
 
         public IEnumerable<TrackWithDetail> TrackGetAllWithDetail()
         {
-            var c = ds.Tracks.Include("Albums");
+            var c = ds.Tracks.Include("Albums.Artists");
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetail>>(c);
         }
 
@@ -210,9 +210,6 @@ namespace Assignment8._2.Controllers
             {
                 // Create the result collection
                 var result = mapper.Map<Track, TrackWithDetail>(o);
-                // Fill in the album names
-                result.AlbumNames = o.Albums.Select(a => a.Name);
-
                 return result;
             }
         }
@@ -244,6 +241,7 @@ namespace Assignment8._2.Controllers
                 return null;
             }else
             {
+                editItem.Clerk = o.Clerk;
                 ds.Entry(o).CurrentValues.SetValues(editItem);
                 ds.SaveChanges();
             }

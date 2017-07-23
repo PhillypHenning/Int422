@@ -64,7 +64,7 @@ namespace Assignment8._2.Controllers
         // GET: Track/Edit/5
         public ActionResult Edit(int? id)
         {
-            var o = m.TrackGetById(id.GetValueOrDefault());
+            var o = m.TrackWithDetailGetById(id.GetValueOrDefault());
             if (o == null)
             {
                 return HttpNotFound();
@@ -72,6 +72,12 @@ namespace Assignment8._2.Controllers
             else
             {
                 var editForm = m.mapper.Map<TrackBase, TrackEditInfoForm>(o);
+                editForm.AlbumList = new MultiSelectList(
+                    items: m.AlbumGetAll(),
+                    dataValueField: "Id",
+                     dataTextField: "Name",
+                     selectedValues: new List<int>() { o.AlbumId }
+                    );
                 return View(editForm);
             }
         }

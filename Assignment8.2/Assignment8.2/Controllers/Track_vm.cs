@@ -56,12 +56,10 @@ namespace Assignment8._2.Controllers
         public IEnumerable<AlbumBase> Albums { get; set; }
     }
 
-    public class TrackEditInfoForm
+    public class TrackEditInfoForm :TrackAddForm
     {
-        public string Name { get; set; }
         [Key]
         public int Id { get; set; }
-        public string Clerk { get; set; }
     }
 
     public class TrackEditInfo
