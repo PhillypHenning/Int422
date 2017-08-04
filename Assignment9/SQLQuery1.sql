@@ -1,0 +1,1 @@
+﻿ALTER TABLE Artists AlTER COLUMN Portrayal VARCHAR(8000);
